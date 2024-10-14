@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const EditForm = ({currentData , updatedData}) => {
 
-  console.log("EditForm", currentData , updatedData);
   const [formdata, setFormData] = useState(
     currentData
   );
@@ -18,7 +17,6 @@ const EditForm = ({currentData , updatedData}) => {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     updatedData(formdata);
-    console.log(formdata);
   };
 
   return (

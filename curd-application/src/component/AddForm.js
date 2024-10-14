@@ -14,8 +14,6 @@ const AddForm = ({gettableData,setTableData}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form Data Submitted: ", formData);
-        console.log(formData);
         setTableData(formData);
     };
 
