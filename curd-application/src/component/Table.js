@@ -35,18 +35,16 @@ const TableData = () => {
   }
 
   const   setTableDataAdd = (data)=>{
-    console.log(data)
+
     setTableData([...gettableData, data])
 
   }
 
 
   const handleUpdate = (updatedData) => {
-    console.log(updatedData)
     const updatedTableData = gettableData.map((item)=> item.company === updatedData.company ? updatedData : item )
     setTableData(updatedTableData);
     setIsEditing(false);
-
   };
 
 
