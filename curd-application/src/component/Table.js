@@ -2,24 +2,55 @@ import React, { useState } from "react";
 import tableData from "./data";
 import EditForm from "./EditForm";
 
+// import AddForm from "./AddForm";
+
+import AddForm from "./AddForm";
+
 const TableData = () => {
   const [gettableData, setTableData] = useState(tableData);
 
-  const [isEditing, setIsEditing] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const handleEdit = () =>{
+
+  const [editData , updatedData] = useState(null);
+
+
+  // const [addData, updateAdData] = useState(null)
+
+
+  const [isAddData , setisAddData] = useState(false);
+
+  const handleEdit = (res) =>{
+    setIsEditing(true);
+    updatedData(res)
     
   }
 
-  
-  const handleUpdate = (updatedData) => {
-      
-    const updatedTableData = gettableData.map((item) =>
-      item.company === updatedData.company? updatedData : item
-    );
+  // setisAddData(true)
+  // setIsEditing(false)
 
+  const handleAddData = ()=>{
+    setisAddData(true)
+    setIsEditing(false)
+  }
+
+  const   setTableDataAdd = (data)=>{
+    console.log(data)
+    setTableData([...gettableData, data])
+
+  }
+
+
+  const handleUpdate = (updatedData) => {
+    console.log(updatedData)
+    const updatedTableData = gettableData.map((item)=> item.company === updatedData.company ? updatedData : item )
+    setTableData(updatedTableData);
+    setIsEditing(false);
 
   };
+
+
+
 
   return (
     <div>
@@ -50,7 +81,7 @@ const TableData = () => {
                   <button
                     id="btn1"
                     type="button"
-                    onClick={() => setIsEditing(false)}
+                    onClick={handleAddData}
                   >
                     ADD
                   </button>
@@ -68,7 +99,10 @@ const TableData = () => {
               </tr>
 
             ))}
-                          {isEditing && <EditForm   currentData={handleUpdate}   />}
+                          {isEditing && <EditForm   currentData={editData}   updatedData={handleUpdate}  />}
+
+                          { isAddData&& <AddForm   gettableData={gettableData} setTableData={setTableDataAdd} />}
+
           </tbody>
         </table>
       </div>

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
-const EditForm = ({handleUpdate}) => {
+const EditForm = ({currentData , updatedData}) => {
 
-  console.log("EditForm", handleUpdate)
-  const [formdata, setFormData] = useState({
-    company: "",
-    contact: "",
-    country: "",
-  });
+  console.log("EditForm", currentData , updatedData);
+  const [formdata, setFormData] = useState(
+    currentData
+  );
 
   const InputHandler = (e) => {
     const { name, value } = e.target;
@@ -19,7 +17,8 @@ const EditForm = ({handleUpdate}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    console.log(formdata)
+    updatedData(formdata);
+    console.log(formdata);
   };
 
   return (
