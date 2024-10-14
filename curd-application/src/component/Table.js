@@ -11,47 +11,48 @@ const TableData = () => {
 
   const [isEditing, setIsEditing] = useState(false);
 
-
-  const [editData , updatedData] = useState(null);
-
+  const [editData, updatedData] = useState(null);
 
   // const [addData, updateAdData] = useState(null)
 
+  const [isAddData, setisAddData] = useState(false);
 
-  const [isAddData , setisAddData] = useState(false);
-
-  const handleEdit = (res) =>{
+  const handleEdit = (res) => {
     setIsEditing(true);
-    updatedData(res)
-    
-  }
+    setisAddData(false);
+    updatedData(res);
+  };
 
   // setisAddData(true)
   // setIsEditing(false)
 
-  const handleAddData = ()=>{
-    setisAddData(true)
-    setIsEditing(false)
-  }
-
-  const   setTableDataAdd = (data)=>{
-
-    setTableData([...gettableData, data])
-
-  }
-
-
-  const handleUpdate = (updatedData) => {
-    const updatedTableData = gettableData.map((item)=> item.company === updatedData.company ? updatedData : item )
-    setTableData(updatedTableData);
+  const handleAddData = () => {
+    setisAddData(true);
     setIsEditing(false);
   };
 
+  const setTableDataAdd = (data) => {
+    setTableData([...gettableData, data]);
+  };
 
-
+  const handleUpdate = (updatedData) => {
+    const updatedTableData = gettableData.map((item) =>
+      item.company === updatedData.company ? updatedData : item
+    );
+    setTableData(updatedTableData);
+    setIsEditing(false);
+    setisAddData(false);
+  };
 
   return (
     <div>
+      {isEditing && (
+        <EditForm currentData={editData} updatedData={handleUpdate} />
+      )}
+
+      {isAddData && (
+        <AddForm gettableData={gettableData} setTableData={setTableDataAdd} />
+      )}
       <div className="table-data">
         <table>
           <thead>
@@ -76,31 +77,20 @@ const TableData = () => {
                   >
                     EDIT
                   </button>
-                  <button
-                    id="btn1"
-                    type="button"
-                    onClick={handleAddData}
-                  >
+                  <button id="btn1" type="button" onClick={handleAddData}>
                     ADD
                   </button>
                   <button
                     type="button"
                     onClick={() =>
-                      setTableData(
-                        gettableData.filter((item) => item !== res)
-                      )
+                      setTableData(gettableData.filter((item) => item !== res))
                     }
                   >
                     DELETE
                   </button>
                 </td>
               </tr>
-
             ))}
-                          {isEditing && <EditForm   currentData={editData}   updatedData={handleUpdate}  />}
-
-                          { isAddData&& <AddForm   gettableData={gettableData} setTableData={setTableDataAdd} />}
-
           </tbody>
         </table>
       </div>

@@ -19,7 +19,7 @@ const AddForm = ({gettableData,setTableData}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form  className="form-edit" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="company"

@@ -20,8 +20,8 @@ const EditForm = ({currentData , updatedData}) => {
   };
 
   return (
-    <div className="">
-    <form onSubmit={handleSubmit}>
+    <div  >
+    <form className="form-edit" onSubmit={handleSubmit}>
 
       <input
         type="text"
